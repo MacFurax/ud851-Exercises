@@ -16,6 +16,7 @@
 package com.example.android.asynctaskloader;
 
 import android.app.LoaderManager;
+import android.content.AsyncTaskLoader;
 import android.content.Loader;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -100,6 +101,8 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
         // TODO (19) Create a bundle called queryBundle
         // TODO (20) Use putString with SEARCH_QUERY_URL_EXTRA as the key and the String value of the URL as the value
+        Bundle queryBundle = new Bundle();
+        queryBundle.putString(SEARCH_QUERY_URL_EXTRA, githubSearchUrl.toString());
 
         // TODO (21) Call getSupportLoaderManager and store it in a LoaderManager variable
         // TODO (22) Get our Loader by calling getLoader and passing the ID we specified
@@ -135,8 +138,21 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     }
 
     @Override
-    public Loader<String> onCreateLoader(int i, Bundle bundle) {
-        return null;
+    public Loader<String> onCreateLoader(int i, final Bundle bundle) {
+        return new AsyncTaskLoader<String>(this) {
+            @Override
+            protected void onStartLoading() {
+                super.onStartLoading();
+                if(null == bundle){
+                    return;
+                }
+            }
+
+            @Override
+            public String loadInBackground() {
+                return null;
+            }
+        };
     }
 
     @Override
