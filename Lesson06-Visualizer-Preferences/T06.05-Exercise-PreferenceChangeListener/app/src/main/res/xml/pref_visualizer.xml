@@ -25,4 +25,9 @@
         android:title="@string/pref_show_treble_label"
         />
 
+    <Preference
+        android:key="but_key"
+        android:title="press me"
+        ></Preference>
+
 </PreferenceScreen>
